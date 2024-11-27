@@ -3,6 +3,7 @@ env = os.environ
 
 
 
+
 BT_API_URL = env['BT_API_URL']
 REQUEST_HEADERS = {'Authorization': f"PS-Auth key={env['BT_API_KEY']}"}
 BT_VERIFY_CA  = True if 'BT_VERIFY_CA' in env and env['BT_VERIFY_CA'].lower() == 'true' else False

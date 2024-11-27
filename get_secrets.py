@@ -13,10 +13,10 @@ def main():
     """
     secrets = controller.get_secrets()
     print(secrets)
-    secrets_json = json.loads(secrets)
+    # secrets_json = json.loads(secrets)
     # for k, v in secrets_json.items():
     #     print(k, v)
-    print(secrets_json["Quasys"]["beyondtrust"]["Password"])
+    # print(secrets_json["Quasys"]["beyondtrust"]["Password"])
     server_object = HTTPServer(server_address=('', 8080), RequestHandlerClass=CGIHTTPRequestHandler)
     server_object.serve_forever()
 

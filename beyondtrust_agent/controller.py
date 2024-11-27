@@ -114,11 +114,13 @@ def get_secrets_from_bt(secrets_list, folder_list, managed_accounts_list):
             secrets_logs.extend(logs)
     elif settings.FETCH_ALL_MANAGED_ACCOUNTS:
         managed_accounts_list = get_managed_accounts()
+        
         # Getting credentials by system name and account name.
         logs, secrets = get_secret_by_system_name_and_account_name(managed_accounts_list)
         secrets_to_file.extend(secrets)
         if logs:
             secrets_logs.extend(logs)
+    # print(secrets_to_file)
     secrets = generate_secret_json_array(secrets_to_file)
     # log_message = f"Creating files with the secrets as content, number of files {len(secrets_to_file)}"
     # secrets_logs.append({'message': log_message, 'type': 'INFO'})
@@ -156,11 +158,9 @@ def get_secrets_by_folder_path_or_secret_path(secrets_by_secret_path, secrets_by
             path = separator.join(folders_in_path[:-1])
             # Checking if it is a single password.
             response = services.get_secret_by_path(path, title, separator)
-            
             if not response:
                 utils.log(f"Secret {path}/{title} was not Found, Validating Folder: {folders_in_path}", logging.INFO)
                 response = services.get_secret_by_path(separator.join(folders_in_path), title, separator, False)
-
                 if not response:
                     log_message = f"Invalid path or Invalid Secret: {secret_path}"
                     secrets_logs.append({
